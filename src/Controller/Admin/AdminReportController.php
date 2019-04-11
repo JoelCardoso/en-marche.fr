@@ -4,8 +4,7 @@ namespace AppBundle\Controller\Admin;
 
 use AppBundle\Entity\Report\Report;
 use AppBundle\Report\ReportManager;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,8 +17,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class AdminReportController extends Controller
 {
     /**
-     * @Route("/{id}/resolve", name="app_admin_report_resolve")
-     * @Method("GET")
+     * @Route("/{id}/resolve", name="app_admin_report_resolve", methods={"GET"})
      * @Security("has_role('ROLE_APP_ADMIN_REPORT_APPROVE')")
      */
     public function resolveAction(Request $request, Report $report, ReportManager $reportManager): Response

@@ -4,8 +4,7 @@ namespace AppBundle\Controller\EnMarche;
 
 use AppBundle\Entity\Invite;
 use AppBundle\Form\InvitationType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,8 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 class InvitationController extends Controller
 {
     /**
-     * @Route("/invitation", name="invitation_form")
-     * @Method({"GET", "POST"})
+     * @Route("/invitation", name="invitation_form", methods={"GET", "POST"})
      */
     public function invitationAction(Request $request)
     {

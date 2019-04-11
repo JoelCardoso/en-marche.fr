@@ -4,7 +4,7 @@ namespace AppBundle\Controller\Api;
 
 use AppBundle\Subscription\SubscriptionHandler;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,8 +18,7 @@ use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 class SubscriptionController extends Controller
 {
     /**
-     * @Route("/change", name="app_change_email_subscriptions_webhook")
-     * @Method({"GET", "POST"})
+     * @Route("/change", name="app_change_email_subscriptions_webhook", methods={"GET", "POST"})
      */
     public function changeEmailSubscriptionsAction(Request $request): Response
     {

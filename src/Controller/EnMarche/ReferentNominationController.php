@@ -4,8 +4,7 @@ namespace AppBundle\Controller\EnMarche;
 
 use AppBundle\Entity\ReferentArea;
 use AppBundle\Entity\Referent;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,8 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ReferentNominationController extends Controller
 {
     /**
-     * @Route("", name="our_referents_homepage")
-     * @Method("GET")
+     * @Route("", name="our_referents_homepage", methods={"GET"})
      */
     public function indexAction(Request $request): Response
     {
@@ -32,8 +30,7 @@ class ReferentNominationController extends Controller
     }
 
     /**
-     * @Route("/{slug}", name="our_referents_referent")
-     * @Method("GET")
+     * @Route("/{slug}", name="our_referents_referent", methods={"GET"})
      */
     public function candidateAction(Referent $referent): Response
     {

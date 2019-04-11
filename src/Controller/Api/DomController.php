@@ -2,16 +2,14 @@
 
 namespace AppBundle\Controller\Api;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DomController extends Controller
 {
     /**
-     * @Route("/dom", name="app_api_dom")
-     * @Method("GET")
+     * @Route("/dom", name="app_api_dom", methods={"GET"})
      */
     public function dom(): JsonResponse
     {

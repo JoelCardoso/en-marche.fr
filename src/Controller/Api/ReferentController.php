@@ -5,9 +5,8 @@ namespace AppBundle\Controller\Api;
 use AppBundle\Entity\Adherent;
 use AppBundle\Repository\CommitteeRepository;
 use AppBundle\Repository\EventRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -32,8 +31,7 @@ class ReferentController extends Controller
     ];
 
     /**
-     * @Route("/search/autocomplete", name="api_referent_space_search_autocomplete")
-     * @Method("GET")
+     * @Route("/search/autocomplete", name="api_referent_space_search_autocomplete", methods={"GET"})
      *
      * @Entity("referent", expr="repository.findReferent(referent)", converter="querystring")
      */
