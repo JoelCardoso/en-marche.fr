@@ -9,7 +9,7 @@ use AppBundle\Form\NewsletterSubscriptionType;
 use AppBundle\Form\NewsletterUnsubscribeType;
 use AppBundle\Newsletter\Invitation;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\PreconditionFailedHttpException;

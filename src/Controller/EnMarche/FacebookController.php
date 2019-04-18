@@ -8,7 +8,7 @@ use AppBundle\Exception\InvalidUuidException;
 use AppBundle\Repository\FacebookProfileRepository;
 use Facebook\Exceptions\FacebookSDKException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
