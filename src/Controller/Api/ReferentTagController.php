@@ -5,7 +5,7 @@ namespace AppBundle\Controller\Api;
 use AppBundle\Entity\ReferentTag;
 use AppBundle\Repository\ReferentTagRepository;
 use JMS\Serializer\SerializerInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

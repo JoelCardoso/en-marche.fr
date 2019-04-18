@@ -7,7 +7,7 @@ use AppBundle\Report\ReportCommand;
 use AppBundle\Report\ReportCreationCommandHandler;
 use AppBundle\Report\ReportManager;
 use AppBundle\Report\ReportType;
-use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

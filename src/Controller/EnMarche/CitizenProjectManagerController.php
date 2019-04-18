@@ -10,7 +10,7 @@ use AppBundle\Entity\CitizenProject;
 use AppBundle\Form\CitizenProjectCommandType;
 use AppBundle\Form\CitizenProjectContactActorsType;
 use AppBundle\Utils\GroupUtils;
-use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\FormType;

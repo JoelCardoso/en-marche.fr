@@ -5,7 +5,7 @@ namespace AppBundle\Controller\EnMarche;
 use AppBundle\Documents\DocumentRepository;
 use AppBundle\Entity\Adherent;
 use League\Flysystem\FileNotFoundException;
-use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 

@@ -13,7 +13,7 @@ use AppBundle\Exception\InvalidUuidException;
 use AppBundle\Form\ContactMembersType;
 use AppBundle\Form\EventCommandType;
 use Knp\Bundle\SnappyBundle\Snappy\Response\SnappyResponse;
-use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

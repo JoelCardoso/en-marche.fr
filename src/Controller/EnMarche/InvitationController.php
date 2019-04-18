@@ -4,7 +4,7 @@ namespace AppBundle\Controller\EnMarche;
 
 use AppBundle\Entity\Invite;
 use AppBundle\Form\InvitationType;
-use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;

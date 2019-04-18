@@ -6,7 +6,7 @@ use AppBundle\Entity\Clarification;
 use AppBundle\Entity\Page;
 use AppBundle\Repository\ClarificationRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DesintoxController extends Controller

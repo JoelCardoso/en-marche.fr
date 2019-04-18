@@ -13,7 +13,7 @@ use AppBundle\Form\Procuration\ElectionContextType;
 use AppBundle\Procuration\ElectionContext;
 use AppBundle\Procuration\ProcurationManager;
 use AppBundle\Procuration\ProcurationSession;
-use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
