@@ -15,6 +15,8 @@ abstract class AssessorFilters
     public const PARAMETER_COUNTRY = 'country';
     public const PARAMETER_CITY = 'city';
 
+    public const VOTE_PLACE_CODE_REGEX = '/([0-9]{5}|2[A-Z][0-9]{3})_[0-9]{4}/';
+
     private const PER_PAGE = 30;
 
     private $currentPage;
@@ -116,16 +118,11 @@ abstract class AssessorFilters
             return;
         }
 
-        if (!\in_array($country, array_keys($this->getCountries()), true)) {
+        if (!\in_array($country, array_keys(UnitedNationsBundle::getCountries()), true)) {
             throw new AssessorException(sprintf('Invalid country filter value given ("%s").', $country));
         }
 
         $this->country = trim($country);
-    }
-
-    public function getCountries(): array
-    {
-        return UnitedNationsBundle::getCountries();
     }
 
     public function hasData(): bool

@@ -11,7 +11,6 @@ class AssessorRequestFilters extends AssessorFilters
     public const PROCESSED = 'processed';
     public const UNPROCESSED = 'unprocessed';
     public const DISABLED = 'disabled';
-
     public const PARAMETER_LAST_NAME = 'last_name';
 
     private $lastName;
@@ -113,7 +112,7 @@ class AssessorRequestFilters extends AssessorFilters
                 $qb->innerJoin("$alias.votePlace", 'vp');
             }
 
-            if (preg_match('/([0-9]{5}|2[A-Z][0-9]{3})_[0-9]{4}/', $this->getVotePlace())) {
+            if (preg_match(AssessorFilters::VOTE_PLACE_CODE_REGEX, $this->getVotePlace())) {
                 $qb
                     ->andWhere('vp.code = :code')
                     ->setParameter('code', $this->getVotePlace())

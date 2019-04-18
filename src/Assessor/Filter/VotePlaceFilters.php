@@ -74,7 +74,7 @@ class VotePlaceFilters extends AssessorFilters
         }
 
         if ($this->getVotePlace()) {
-            if (preg_match('/([0-9]{5}|2[A-Z][0-9]{3})_[0-9]{4}/', $this->getVotePlace())) {
+            if (preg_match(AssessorFilters::VOTE_PLACE_CODE_REGEX, $this->getVotePlace())) {
                 $qb
                     ->andWhere("$alias.code = :code")
                     ->setParameter('code', $this->getVotePlace())
