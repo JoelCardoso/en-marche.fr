@@ -2,6 +2,8 @@
 
 namespace AppBundle\Assessor\Filter;
 
+use AppBundle\Exception\AssessorException;
+use AppBundle\Intl\UnitedNationsBundle;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -9,11 +11,17 @@ abstract class AssessorFilters
 {
     public const PARAMETER_PAGE = 'page';
     public const PARAMETER_STATUS = 'status';
+    public const PARAMETER_VOTE_PLACE = 'vote_place';
+    public const PARAMETER_COUNTRY = 'country';
+    public const PARAMETER_CITY = 'city';
 
     private const PER_PAGE = 30;
 
     private $currentPage;
     private $status;
+    private $country;
+    private $city;
+    private $votePlace;
 
     final private function __construct()
     {
@@ -29,6 +37,18 @@ abstract class AssessorFilters
 
         if ($page = $request->query->getInt(self::PARAMETER_PAGE, 1)) {
             $filters->setCurrentPage($page);
+        }
+
+        if ($country = $request->query->get(self::PARAMETER_COUNTRY)) {
+            $filters->setCountry($country);
+        }
+
+        if ($city = $request->query->get(self::PARAMETER_CITY)) {
+            $filters->setCity($city);
+        }
+
+        if ($votePlace = $request->query->get(self::PARAMETER_VOTE_PLACE)) {
+            $filters->setVotePlace($votePlace);
         }
 
         return $filters;
@@ -61,6 +81,56 @@ abstract class AssessorFilters
     public function getStatus(): ?string
     {
         return $this->status;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity($city): void
+    {
+        $this->city = $city;
+    }
+
+    public function getVotePlace(): ?string
+    {
+        return $this->votePlace;
+    }
+
+    public function setVotePlace($votePlace): void
+    {
+        $this->votePlace = $votePlace;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): void
+    {
+        if (empty($country = strtoupper(trim($country)))) {
+            $this->country = null;
+
+            return;
+        }
+
+        if (!\in_array($country, array_keys($this->getCountries()), true)) {
+            throw new AssessorException(sprintf('Invalid country filter value given ("%s").', $country));
+        }
+
+        $this->country = trim($country);
+    }
+
+    public function getCountries(): array
+    {
+        return UnitedNationsBundle::getCountries();
+    }
+
+    public function hasData(): bool
+    {
+        return $this->country || $this->city || $this->votePlace;
     }
 
     public function apply(QueryBuilder $qb, string $alias): void

@@ -12,10 +12,18 @@ class AssessorRequestFilters extends AssessorFilters
     public const UNPROCESSED = 'unprocessed';
     public const DISABLED = 'disabled';
 
+    public const PARAMETER_LAST_NAME = 'last_name';
+
+    private $lastName;
+
     public static function fromRequest(Request $request)
     {
         $filters = parent::fromRequest($request);
         $filters->setStatus($request->query->get(self::PARAMETER_STATUS, self::UNPROCESSED));
+
+        if ($lastName = $request->query->get(self::PARAMETER_LAST_NAME)) {
+            $filters->setLastname($lastName);
+        }
 
         return $filters;
     }
@@ -25,10 +33,25 @@ class AssessorRequestFilters extends AssessorFilters
         $status = mb_strtolower(trim($status));
 
         if ($status && !\in_array($status, [self::PROCESSED, self::UNPROCESSED, self::DISABLED], true)) {
-            throw new AssessorException(sprintf('Unexpected procuration request status "%s".', $status));
+            throw new AssessorException(sprintf('Unexpected assessor request status "%s".', $status));
         }
 
         parent::setStatus($status);
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): void
+    {
+        $this->lastName = $lastName;
+    }
+
+    public function hasData(): bool
+    {
+        return parent::hasData() || $this->lastName;
     }
 
     public function apply(QueryBuilder $qb, string $alias): void
@@ -53,6 +76,58 @@ class AssessorRequestFilters extends AssessorFilters
                 ->setParameter('processed', true)
                 ->setParameter('enabled', true)
             ;
+        }
+
+        if ($this->getLastName()) {
+            $qb
+                ->andWhere("$alias.lastName = :lastName")
+                ->setParameter('lastName', $this->getLastName())
+            ;
+        }
+
+        if ($this->getCity()) {
+            if (is_numeric($this->getCity())) {
+                $qb
+                    ->andWhere("$alias.assessorPostalCode LIKE :assessorPostalCode")
+                    ->setParameter('assessorPostalCode', $this->getCity().'%')
+                ;
+            } else {
+                $qb
+                    ->andWhere("LOWER($alias.assessorCity) LIKE :assessorCity")
+                    ->setParameter('assessorCity', '%'.strtolower($this->getCity()).'%')
+                ;
+            }
+        }
+
+        if ($this->getCountry()) {
+            $qb
+                ->andWhere("$alias.assessorCountry = :assessorCountry")
+                ->setParameter('assessorCountry', $this->getCountry())
+            ;
+        }
+
+        if ($this->getVotePlace()) {
+            if ($this->isStatusUnprocessed()) {
+                $qb->innerJoin("$alias.votePlaceWishes", 'vp');
+            } else {
+                $qb->innerJoin("$alias.votePlace", 'vp');
+            }
+
+            if (preg_match('/([0-9]{5}|2[A-Z][0-9]{3})_[0-9]{4}/', $this->getVotePlace())) {
+                $qb
+                    ->andWhere('vp.code = :code')
+                    ->setParameter('code', $this->getVotePlace())
+                ;
+            } else {
+                $qb
+                    ->andWhere('vp.name LIKE :name')
+                    ->setParameter('name', '%'.strtolower($this->getVotePlace()).'%')
+                ;
+            }
+
+            if ($this->isStatusUnprocessed()) {
+                $qb->andWhere("$alias.votePlace IS NULL");
+            }
         }
 
         $qb
