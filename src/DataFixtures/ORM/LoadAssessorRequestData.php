@@ -189,7 +189,7 @@ class LoadAssessorRequestData extends Fixture
             'firstName' => 'Leonardo',
             'birthdate' => '12-11-1972',
             'birthCity' => 'Italie',
-            'address' => '4 plaza de la pasta',
+            'address' => '4 piazza della pasta',
             'postalCode' => null,
             'city' => 'Italie',
             'voteCity' => 'Italie',
