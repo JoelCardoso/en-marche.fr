@@ -107,7 +107,10 @@ class AssessorRequestFilters extends AssessorFilters
 
         if ($this->getVotePlace()) {
             if ($this->isStatusUnprocessed()) {
-                $qb->innerJoin("$alias.votePlaceWishes", 'vp');
+                $qb
+                    ->innerJoin("$alias.votePlaceWishes", 'vp')
+                    ->andWhere("$alias.votePlace IS NULL")
+                ;
             } else {
                 $qb->innerJoin("$alias.votePlace", 'vp');
             }
@@ -122,10 +125,6 @@ class AssessorRequestFilters extends AssessorFilters
                     ->andWhere('vp.name LIKE :name')
                     ->setParameter('name', '%'.strtolower($this->getVotePlace()).'%')
                 ;
-            }
-
-            if ($this->isStatusUnprocessed()) {
-                $qb->andWhere("$alias.votePlace IS NULL");
             }
         }
 

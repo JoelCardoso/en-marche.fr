@@ -90,7 +90,7 @@ abstract class AssessorFilters
         return $this->city;
     }
 
-    public function setCity($city): void
+    public function setCity(string $city): void
     {
         $this->city = $city;
     }
@@ -100,7 +100,7 @@ abstract class AssessorFilters
         return $this->votePlace;
     }
 
-    public function setVotePlace($votePlace): void
+    public function setVotePlace(string $votePlace): void
     {
         $this->votePlace = $votePlace;
     }
@@ -118,11 +118,16 @@ abstract class AssessorFilters
             return;
         }
 
-        if (!\in_array($country, array_keys(UnitedNationsBundle::getCountries()), true)) {
+        if (!\in_array($country, array_keys($this->getCountries()), true)) {
             throw new AssessorException(sprintf('Invalid country filter value given ("%s").', $country));
         }
 
-        $this->country = trim($country);
+        $this->country = $country;
+    }
+
+    public function getCountries()
+    {
+        return UnitedNationsBundle::getCountries();
     }
 
     public function hasData(): bool
